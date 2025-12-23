@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { TrendingUp, Activity, Target, AlertCircle } from 'lucide-react';
 import { getTrainingMetrics, TrainingMetrics } from '../lib/feedbackUtils';
 
-export function TrainingMetrics() {
+/*export function TrainingMetrics() {
   const [metrics, setMetrics] = useState<TrainingMetrics | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);*/
 
   useEffect(() => {
     loadMetrics();
