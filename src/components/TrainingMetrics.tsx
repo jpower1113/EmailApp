@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { TrendingUp, Activity, Target, AlertCircle } from 'lucide-react';
-import { getTrainingMetrics, TrainingMetrics } from '../lib/feedbackUtils';
+import { getTrainingMetrics, TrainingMetrics as TrainingMetricsType } from '../lib/feedbackUtils';
 
 export function TrainingMetrics() {
-  const [metrics, setMetrics] = useState<TrainingMetrics | null>(null);
+  const [metrics, setMetrics] = useState<TrainingMetricsType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,8 +18,34 @@ export function TrainingMetrics() {
     setLoading(false);
   };
 
-  if (loading || !metrics) {
-    return null;
+  if (loading) {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div className="animate-pulse">
+          <div className="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="h-16 bg-gray-200 rounded"></div>
+            <div className="h-16 bg-gray-200 rounded"></div>
+            <div className="h-16 bg-gray-200 rounded"></div>
+            <div className="h-16 bg-gray-200 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!metrics) {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h3 className="text-lg font-semibold mb-6 flex items-center gap-2 text-gray-800">
+          <TrendingUp className="w-5 h-5 text-blue-600" />
+          System Performance Metrics
+        </h3>
+        <p className="text-gray-600 text-center py-8">
+          No training data available yet. Metrics will appear after users provide feedback on scan results.
+        </p>
+      </div>
+    );
   }
 
   return (
